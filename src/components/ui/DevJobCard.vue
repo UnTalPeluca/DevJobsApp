@@ -94,12 +94,13 @@ export default {
     }
     @media screen and (min-width: 768px) {
         .dev-job-card{
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }     
     }
     @media screen and (min-width: 1280px){
         .dev-job-card{
-            max-width: 350px;
+            width: 350px;
+            margin-bottom: 40px;
         }
     }
 </style>

@@ -20,6 +20,10 @@ Users should be able to:
 - Be able to click a job from the index page so that they can read more information and apply for the job
 - Have the correct color scheme chosen for them based on their computer preferences.
 
+### Screenshot
+
+![](./screenshot.jpg)
+
 ### Links
 
 - Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/dev-jobs-app-with-vue-mDIqEMZkJ)

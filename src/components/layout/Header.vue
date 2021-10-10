@@ -34,6 +34,7 @@ export default {
     @media screen and (min-width:768px) {
         header{
             background-position-y: -5px;
+            height: 160px;
         }
     }
 </style>

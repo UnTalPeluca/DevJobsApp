@@ -189,6 +189,12 @@ html{
   header{
     border-bottom-left-radius: 80px;
   }
+  #search-bar{
+    top: 115px;
+  }
+  .load-more{
+    margin-bottom: 65px;
+  }
 }
 @media screen and (min-width:1280px) {
   :root{
@@ -196,10 +202,12 @@ html{
   }
   .jobs-container{
     width: clamp(690px,87.5vw,100%);
-    justify-content:flex-start;
     gap: 30px;
     margin: auto;
-    padding-top: 50px;
+    padding-top: 30px;
+  }
+  .load-more{
+    margin-bottom: 100px;
   }
 }
 </style>
