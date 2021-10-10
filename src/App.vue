@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container">
     <Header/>
     <main>
       <apply-section :Job="applyData" v-if="Object.keys(applyData).length > 0" @click-close="closeCard"/>
@@ -9,6 +9,7 @@
           <div class="jobs-container" v-if="waitMount">
             <DevJobCard @user-click-on-card="userClickOnCard" :Job="item" v-for="item in filterSearch" v-bind:key="item.id"/>
           </div>
+          <button class="load-more" v-if="!loadMore" @click="loadMore = !loadMore">Load More</button>
         </div>
       </div>
     </main>
@@ -33,7 +34,8 @@ export default {
     return{
       Jobs: JobsData,
       waitMount: false,
-      applyData:{}
+      applyData:{},
+      loadMore: false,
     }
   },
   methods:{
@@ -42,6 +44,9 @@ export default {
     },
     closeCard(){
       this.applyData = {}
+    },
+    loadMoreCards(){
+
     }
   },
   computed:{
@@ -52,13 +57,23 @@ export default {
       let locationsFiltered = jobsFiltered.filter(job => {
         return job.location.toLowerCase().includes(this.$refs.searchBar.searchLocationSubmit.toLowerCase())
       })
-      if (this.$refs.searchBar.fullTimeSubmit === true){
+      let fullTimeFiltered = function (){
+              if (this.$refs.searchBar.fullTimeSubmit === true){
         return locationsFiltered.filter(job => {
           return job.contract === "Full Time"
         })
-      } else{
-        return locationsFiltered
+        } else{
+          return locationsFiltered
+        }
       }
+      let count = 0;
+      return jobsFiltered.filter(job => {
+        count++
+        if(this.loadMore == false){
+          return count <= 12
+        }
+        return true
+      })
     },
     showApply(){
       return Object.keys(this.applyData).length > 0;
@@ -112,6 +127,21 @@ body{
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 1.6rem;
 }
+.load-more{
+  height: 48px;
+  width: 141px;
+  background-color: var(--text-alt);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin: auto;
+  display: block;
+  margin-bottom: 40px;
+}
+.load-more:hover{
+  background-color: #939BF4;
+  cursor: pointer;
+}
 button{
   font-size: 1.6rem;
   font-weight: bold;
@@ -129,13 +159,12 @@ html{
   padding-top: 100px;
 }
 .jobs-container{
+  margin: auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  gap: 50px;
-  margin: auto;
-  padding-bottom: 25px;
+  padding-top: 10px;
 }
 #search-bar{
   position: absolute;
@@ -170,6 +199,7 @@ html{
     justify-content:flex-start;
     gap: 30px;
     margin: auto;
+    padding-top: 50px;
   }
 }
 </style>

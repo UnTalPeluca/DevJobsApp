@@ -2,7 +2,7 @@
     <div id="search-bar">
         <div class="search-bar-container">
             <img src="../../assets/images/icons/icon-search.svg" alt="">
-            <input autocomplete="new-text" ref="inputSearch" @keyup.enter="search" v-model="searchValue" class="input" type="text" name="" id="input-job" placeholder="Filter by title...">
+            <input autocomplete="new-text" ref="inputSearch" @keyup.enter="search" v-model="searchValue" class="input" type="text" name="input-job" id="input-job" placeholder="Filter by title...">
         </div>
         <div id="search-overlay-mobile"></div>
         <div v-show="width < 768" class="search-bar-right-mobile">
@@ -17,7 +17,7 @@
         <div v-show="showOverlay || width >= 768" class="filter-search-desktop">
             <div class="search-bar-location">
                 <img src="../../assets/images/icons/icon-location.svg" alt="">
-                <input  autocomplete="new-text" ref="inputLocation" @keyup.enter="search" @keyup.esc="showOverlay = false" v-model="searchLocation" class="input" type="text" name="" id="input-location" placeholder="Filter by location...">
+                <input  autocomplete="new-text" ref="inputLocation" @keyup.enter="search" @keyup.esc="showOverlay = false" v-model="searchLocation" class="input" type="text" name="input-location" id="input-location" placeholder="Filter by location...">
             </div>
             <div @click="fullTimeChecked = !fullTimeChecked" class="full-time">
                 <button>
@@ -285,7 +285,18 @@ export default {
             padding-right: 16px;
         }
         .submit-button{
-            max-width: 80px;
+            width: 80px;
+        }
+    }
+    @media screen and (min-width:1280px) {
+        #full-time{
+            display: none;
+        }
+        #full-time-only{
+            display: block;
+        }
+        .submit-button{
+            width: 123px;
         }
     }
 </style>

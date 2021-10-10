@@ -1,5 +1,5 @@
 <template>
-    <div id="dev-job-card" @click="$emit('user-click-on-card', Job )">
+    <div class="dev-job-card" @click="$emit('user-click-on-card', Job )">
         <div :style="bgColor" class="card-logo-container">
             <img v-on="check" :src="require('../../../static' + Job.logo.substring(1))" alt="" class="card-logo">
         </div>
@@ -35,15 +35,16 @@ export default {
 }
 </script>
 <style scoped>
-    #dev-job-card{
+    .dev-job-card{
         width: 100%;
-        max-width: 339px;
+        width: 335px;
         height: 228px;
         background-color: var(--card-color);
         position: relative;
         border-radius: 6px;
+        margin-bottom: 45px;
     }
-    #dev-job-card:hover{
+    .dev-job-card:hover{
         cursor: pointer;
     }
     .card-logo-container{
@@ -92,12 +93,12 @@ export default {
         font-size: 1.4rem;
     }
     @media screen and (min-width: 768px) {
-        #dev-job-card{
-            margin-bottom: 65px;
+        .dev-job-card{
+            margin-bottom: 40px;
         }     
     }
     @media screen and (min-width: 1280px){
-        #dev-job-card{
+        .dev-job-card{
             max-width: 350px;
         }
     }
