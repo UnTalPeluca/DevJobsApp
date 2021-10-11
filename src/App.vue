@@ -9,7 +9,7 @@
           <div class="jobs-container" v-if="waitMount">
             <DevJobCard @user-click-on-card="userClickOnCard" :Job="item" v-for="item in filterSearch" v-bind:key="item.id"/>
           </div>
-          <button class="load-more" v-if="!loadMore" @click="loadMore = !loadMore">Load More</button>
+          <button id="load-more" v-if="showLoadMoreButton" @click="loadMore = true">Load More</button>
         </div>
       </div>
     </main>
@@ -36,20 +36,23 @@ export default {
       waitMount: false,
       applyData:{},
       loadMore: false,
+      loadMoreLess: false,
     }
   },
   methods:{
     userClickOnCard(Job) {
+      window.scrollTo(0,0);
+      console.log('hola')
       this.applyData = Job
     },
     closeCard(){
       this.applyData = {}
     },
-    loadMoreCards(){
-
-    }
   },
   computed:{
+    showLoadMoreButton(){
+      return this.loadMore == false && this.loadMoreLess == false
+    },
     filterSearch () {
       let jobsFiltered = this.Jobs.filter(job => {
         return job.position.toLowerCase().includes(this.$refs.searchBar.searchSubmit.toLowerCase())
@@ -57,27 +60,30 @@ export default {
       let locationsFiltered = jobsFiltered.filter(job => {
         return job.location.toLowerCase().includes(this.$refs.searchBar.searchLocationSubmit.toLowerCase())
       })
-      let fullTimeFiltered = function (){
-              if (this.$refs.searchBar.fullTimeSubmit === true){
-        return locationsFiltered.filter(job => {
-          return job.contract === "Full Time"
-        })
-        } else{
-          return locationsFiltered
+      let fullTimeFiltered;
+      if (this.$refs.searchBar.fullTimeSubmit === true){
+        fullTimeFiltered = locationsFiltered.filter(job => {
+            return job.contract === "Full Time"
+          })
+      } else{
+          fullTimeFiltered = locationsFiltered
         }
-      }
+      this.loadMoreLess = fullTimeFiltered.length < 12
       let count = 0;
-      return jobsFiltered.filter(job => {
+      let finalFilter = fullTimeFiltered.filter(job => {
         count++
         if(this.loadMore == false){
+          console.log('ea')
           return count <= 12
-        }
+        } else
+        console.log('dis')
         return true
       })
+      return finalFilter
     },
     showApply(){
       return Object.keys(this.applyData).length > 0;
-    }
+    },
   },
    mounted(){
     this.waitMount = true
@@ -127,7 +133,7 @@ body{
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 1.6rem;
 }
-.load-more{
+#load-more{
   height: 48px;
   width: 141px;
   background-color: var(--text-alt);
@@ -138,7 +144,7 @@ body{
   display: block;
   margin-bottom: 40px;
 }
-.load-more:hover{
+#load-more:hover{
   background-color: #939BF4;
   cursor: pointer;
 }
@@ -190,7 +196,7 @@ html{
     border-bottom-left-radius: 80px;
   }
   #search-bar{
-    top: 115px;
+    top: 120px;
   }
   .load-more{
     margin-bottom: 65px;
@@ -204,9 +210,10 @@ html{
     width: clamp(690px,87.5vw,100%);
     gap: 30px;
     margin: auto;
-    padding-top: 30px;
+    padding-top: 40px;
   }
   .load-more{
+    margin-top: 10px;
     margin-bottom: 100px;
   }
 }

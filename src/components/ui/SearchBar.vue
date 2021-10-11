@@ -19,7 +19,7 @@
                 <img src="../../assets/images/icons/icon-location.svg" alt="">
                 <input ref="inputLocation" @keyup.enter="search" @keyup.esc="showOverlay = false" v-model="searchLocation" class="input" type="text" name="input-location" id="input-location" placeholder="Filter by location...">
             </div>
-            <div @click="fullTimeChecked = !fullTimeChecked" class="full-time">
+            <div @click="checkFullTime" class="full-time">
                 <button>
                     <div v-show="fullTimeChecked" class="check-container">
                         <img src="../../assets/images/icons/icon-check.svg" alt="">
@@ -64,6 +64,9 @@ export default {
             this.showOverlay = true
             setTimeout(() => this.$refs.inputLocation.focus(), 200);
         },
+        checkFullTime(){
+            this.fullTimeChecked = !this.fullTimeChecked
+        }
     },
     computed:{
 
@@ -245,6 +248,10 @@ export default {
         display:none;
     }
     @media screen and (min-width:768px) {
+        .search-bar-container img{
+            display: block;
+            padding-right: 15px;
+        }
         .filter-search-desktop{
             position: static;
             display: flex;
@@ -254,6 +261,8 @@ export default {
         }
         .search-bar-container{
             width: 33%;
+            display: flex;
+            align-items: center;
         }
         .search-bar-location{
             border-bottom: none;
@@ -297,6 +306,9 @@ export default {
         }
         .submit-button{
             width: 123px;
+        }
+        .search-bar-container{
+            width: 50%;
         }
     }
 </style>

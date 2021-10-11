@@ -52,7 +52,7 @@ export default {
         width: 50px;
         height: 50px;
         position: absolute;
-        top: -30px;
+        top: -25px;
         border-radius: 16px;
     }
     .card-logo{
